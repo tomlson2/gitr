@@ -10,6 +10,7 @@ import configparser
 
 class CodeFile:
     def __init__(self, path, content):
+    This class represents a file that contains code with comments.
         self.path = path
         self.content = content
 
