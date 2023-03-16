@@ -1,4 +1,3 @@
-import os
 import openai
 
 class Model:
@@ -8,7 +7,7 @@ class Model:
         self.model = "text-davinci-003"
 
     def read_auth(self):
-        with open('key.txt', 'r') as file:
+        with open('openaitoken.txt', 'r') as file:
             auth_key = file.readline().strip()
         return auth_key
     

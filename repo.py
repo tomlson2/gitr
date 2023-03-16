@@ -85,7 +85,7 @@ class RepoManager:
             title="Update README.md",
             body="This pull request updates the README.md file with Documatic.",
             head=branch_name,
-            base='master'
+            base=repo.default_branch
         )
 
         return pull_request.html_url
