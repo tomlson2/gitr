@@ -4,19 +4,21 @@ import time
 import re
 from github import Github
 from git import Repo
+from model import Model
+import configparser
 
 class RepoManager:
-    def __init__(self, access_token):
-        self.access_token = access_token
-        self.github = Github(access_token)
+    def __init__(self, repo_owner, repo_name):
+        self.access_token = self.read_auth()
+        self.github = Github(self.access_token)
+        self.repo = self.github.get_repo(f"{repo_owner}/{repo_name}")
+    
+    def read_auth(self):
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        return config.get('GitHub', 'access_token')
 
-    @staticmethod
-    def read_auth(filename='ghtoken.txt'):
-        with open(filename, 'r') as file:
-            auth_key = file.readline().strip()
-        return auth_key
-
-    def aggregate_repo_content(self, repo, path='', token_limit=5000, max_file_size=100000):
+    def aggregate_repo_content(self, path='', token_limit=5000, max_file_size=100000):
         content_buffer = ""
         file_priority = ['.md', '.rst', '.txt', '.py', '.js', '.html', '.css', '.java', '.cpp', '.c']
 
@@ -28,7 +30,7 @@ class RepoManager:
                 file_content = re.sub(r'<svg[\s\S]*?<\/svg>', '', file_content)
             return file_content
 
-        contents = repo.get_contents(path)
+        contents = self.repo.get_contents(path)
         contents = sorted(contents, key=lambda c: (c.type, file_priority.index(os.path.splitext(c.path)[1]) if os.path.splitext(c.path)[1] in file_priority else len(file_priority)))
 
         for content in contents:
@@ -39,7 +41,7 @@ class RepoManager:
                 if content.path in ['node_modules', '.next', 'nextjs']:
                     continue                
 
-                content_buffer += self.aggregate_repo_content(repo, content.path, token_limit - len(content_buffer))
+                content_buffer += self.aggregate_repo_content(content.path, token_limit - len(content_buffer))
             elif content.type == 'file' and is_text_file(content.path):
                 try:
                     # Skip large files
@@ -59,12 +61,12 @@ class RepoManager:
 
         return content_buffer
 
-    def create_readme_pr(self, repo, prompt):
+    def create_readme_pr(self, completion):
         branch_name = f'update-readme-{int(time.time())}'
 
         # Clone the repository to a temporary directory
         with tempfile.TemporaryDirectory() as temp_dir:
-            git_repo = Repo.clone_from(repo.clone_url, temp_dir)
+            git_repo = Repo.clone_from(self.repo.clone_url, temp_dir)
 
             # Create a new branch
             git_repo.git.checkout('-b', branch_name)
@@ -73,7 +75,7 @@ class RepoManager:
             # Create or modify the README file
             readme_path = os.path.join(temp_dir, 'README.md')
             with open(readme_path, 'w') as readme_file:
-                readme_file.write(prompt)
+                readme_file.write(completion)
 
             # Commit and push the changes
             git_repo.git.add(readme_path)
@@ -81,11 +83,20 @@ class RepoManager:
             git_repo.git.push('--set-upstream', 'origin', branch_name)
 
         # Create a pull request
-        pull_request = repo.create_pull(
+        pull_request = self.repo.create_pull(
             title="Update README.md",
             body="This pull request updates the README.md file with Documatic.",
             head=branch_name,
-            base=repo.default_branch
+            base=self.repo.default_branch
         )
 
         return pull_request.html_url
+    
+    def generate_readme(self):
+        prompt = self.aggregate_repo_content()
+        completion = Model().generate_completion("text-davinci-003", prompt=prompt)
+        self.create_readme_pr(completion["choices"][0]["text"])
+
+
+    def generate_comments(self):
+        pass

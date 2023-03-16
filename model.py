@@ -1,20 +1,20 @@
 import openai
+import configparser
 
 class Model:
 
     def __init__(self) -> None:
         openai.api_key = self.read_auth()
-        self.model = "text-davinci-003"
 
     def read_auth(self):
-        with open('openaitoken.txt', 'r') as file:
-            auth_key = file.readline().strip()
-        return auth_key
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        return config.get('OpenAI', 'api_key')
     
-    def generate_completion(self, prompt):
-        completion = openai.Completion.create(model="text-davinci-003", max_tokens=1000, prompt=f"{prompt}\ngenerate a readme file including requirements and usage for this code.")
+    def generate_completion(self, model, prompt):
+        completion = openai.Completion.create(model=model, max_tokens=1000, prompt=f"{prompt}\ngenerate a readme file including requirements and usage for this code.")
         return completion
-
+    
 
 if __name__ == "__main__":
     print(Model().generate_completion())
