@@ -2,6 +2,7 @@ import argparse
 from repo import RepoManager
 
 def main(repo_owner, repo_name):
+def main(repo_owner, repo_name):
     manager = RepoManager(repo_owner, repo_name)
     completion = manager.generate_comments()
 
