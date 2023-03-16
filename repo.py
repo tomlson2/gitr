@@ -62,10 +62,8 @@ class RepoManager:
                     file_ext = os.path.splitext(content.path)[1]
                     file_content = content.decoded_content.decode('utf-8')
                     file_content = remove_svg_content(file_content, file_ext)
-                    print(file_content)
                     if skeleton:
                         file_content = self.parse_python(file_ext, file_content)
-                        print(file_content)
                     code_files.append(CodeFile(content.path, file_content))
                 except:
                     print(f"Error decoding file: {content.path}")
@@ -119,7 +117,7 @@ class RepoManager:
         return pull_request.html_url
 
     def generate_comments_for_functions(self):
-        code_files = self.get_code_files(skeleton=True)
+        code_files = self.get_code_files()
         model = Model()
 
         branch_name = f'add-comments-{int(time.time())}'
@@ -132,18 +130,18 @@ class RepoManager:
 
             # Add comments to each file
             for code_file in code_files:
-                if not code_file.content or code_file.content == "":
+                print(code_file.path[-3:])
+                if not code_file.content or code_file.path[-3:] != ".py":
                     continue
-                else:
-                    print(code_file.path)
                 file_path = os.path.join(temp_dir, code_file.path)
                 with open(file_path, 'r') as file:
                     original_content = file.read()
 
+                completion = model.generate_completion("text-davinci-003", prompt=f"{code_file.content} Please analyze the code and generate detailed docstrings for each function, it should be formatted and styled after the PEP8 standard. only write the first line of the function with the docstring under it. Do it for all of the functions and classes in the code block. Do not add extra code.")
                 # Generate comments for the parsed "function-only" code
-                print(code_file.content)
-                completion = model.generate_edit("code-davinci-edit-001", prompt=code_file.content, instruction="Add code comments above functions.")
                 function_with_comment = completion["choices"][0]["text"]
+                print(code_file.content)
+                print(function_with_comment)
 
                 # Integrate comments back into the original code
                 updated_content = self.integrate_comments(original_content, code_file.content, function_with_comment)
@@ -184,7 +182,7 @@ class RepoManager:
                 while index > 0:
                     index -= 1
                     comment_line = function_with_comment_lines[index].strip()
-                    if comment_line.startswith('#'):
+                    if comment_line.startswith('"""'):
                         comment_lines.insert(0, comment_line)
                     else:
                         break
