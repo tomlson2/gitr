@@ -1,6 +1,7 @@
 import openai
 import configparser
 
+    def read_auth(self):
 class Model:
 
     def __init__(self) -> None:
