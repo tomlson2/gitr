@@ -10,6 +10,7 @@ import configparser
 
 class CodeFile:
     def __init__(self, path, content):
+Defines classes that check a user's code for sufficient comments
         self.path = path
         self.content = content
 
