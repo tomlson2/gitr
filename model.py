@@ -12,7 +12,7 @@ class Model:
         return config.get('OpenAI', 'api_key')
     
     def generate_completion(self, model, prompt):
-        completion = openai.Completion.create(model=model, max_tokens=1000, prompt=f"{prompt}\ngenerate a readme file including requirements and usage for this code.")
+        completion = openai.Completion.create(model=model, max_tokens=1500, prompt=prompt)
         return completion
     
 
