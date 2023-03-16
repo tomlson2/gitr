@@ -1,3 +1,4 @@
+
 # Documatic
 
 Documatic is an automated script for generating README files for Github Repositories.
