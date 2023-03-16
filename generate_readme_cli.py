@@ -3,7 +3,7 @@ from repo import RepoManager
 
 def main(repo_owner, repo_name):
     manager = RepoManager(repo_owner, repo_name)
-    completion = manager.generate_comments()
+    manager.generate_comments_for_functions()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Generate README.md for a GitHub repository and create a pull request.')

@@ -11,9 +11,14 @@ class Model:
         config.read('config.ini')
         return config.get('OpenAI', 'api_key')
     
-    def generate_completion(self, model, prompt):
-        completion = openai.Completion.create(model=model, max_tokens=1500, prompt=prompt)
+    def generate_completion(self, model, prompt, temperature=0.5):
+        completion = openai.Completion.create(model=model, temperature=temperature, max_tokens=1500, prompt=prompt)
         return completion
+    
+    def generate_edit(self, model, prompt, instruction, temperature=0.9):
+        edit = openai.Edit.create(model=model, input=prompt, instruction=instruction, temperature=temperature)
+        print(f'edit: {edit}')
+        return edit
     
 
 if __name__ == "__main__":
