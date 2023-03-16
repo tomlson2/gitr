@@ -1,13 +1,576 @@
-import argparse
-from repo import RepoManager
+#!/usr/bin/env python3
+i#!/usr/bin/env python3
+m#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+r#!/usr/bin/env python3
+t#!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
 
-def main(repo_owner, repo_name):
-    manager = RepoManager(repo_owner, repo_name)
-    completion = manager.generate_comments()
+#!/usr/bin/env python3
+f#!/usr/bin/env python3
+r#!/usr/bin/env python3
+o#!/usr/bin/env python3
+m#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+ #!/usr/bin/env python3
+i#!/usr/bin/env python3
+m#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+r#!/usr/bin/env python3
+t#!/usr/bin/env python3
+ #!/usr/bin/env python3
+R#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+M#!/usr/bin/env python3
+a#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+g#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Generate README.md for a GitHub repository and create a pull request.')
-    parser.add_argument('repo_owner', type=str, help='The owner of the repository.')
-    parser.add_argument('repo_name', type=str, help='The name of the repository.')
-    args = parser.parse_args()
-    main(args.repo_owner, args.repo_name)
+#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+d#!/usr/bin/env python3
+e#!/usr/bin/env python3
+f#!/usr/bin/env python3
+ #!/usr/bin/env python3
+m#!/usr/bin/env python3
+a#!/usr/bin/env python3
+i#!/usr/bin/env python3
+n#!/usr/bin/env python3
+(#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+o#!/usr/bin/env python3
+w#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+)#!/usr/bin/env python3
+:#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+m#!/usr/bin/env python3
+a#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+g#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+ #!/usr/bin/env python3
+=#!/usr/bin/env python3
+ #!/usr/bin/env python3
+R#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+M#!/usr/bin/env python3
+a#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+g#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+(#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+o#!/usr/bin/env python3
+w#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+)#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+c#!/usr/bin/env python3
+o#!/usr/bin/env python3
+m#!/usr/bin/env python3
+p#!/usr/bin/env python3
+l#!/usr/bin/env python3
+e#!/usr/bin/env python3
+t#!/usr/bin/env python3
+i#!/usr/bin/env python3
+o#!/usr/bin/env python3
+n#!/usr/bin/env python3
+ #!/usr/bin/env python3
+=#!/usr/bin/env python3
+ #!/usr/bin/env python3
+m#!/usr/bin/env python3
+a#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+g#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+.#!/usr/bin/env python3
+g#!/usr/bin/env python3
+e#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+a#!/usr/bin/env python3
+t#!/usr/bin/env python3
+e#!/usr/bin/env python3
+_#!/usr/bin/env python3
+c#!/usr/bin/env python3
+o#!/usr/bin/env python3
+m#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+n#!/usr/bin/env python3
+t#!/usr/bin/env python3
+s#!/usr/bin/env python3
+(#!/usr/bin/env python3
+)#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+i#!/usr/bin/env python3
+f#!/usr/bin/env python3
+ #!/usr/bin/env python3
+_#!/usr/bin/env python3
+_#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+_#!/usr/bin/env python3
+_#!/usr/bin/env python3
+ #!/usr/bin/env python3
+=#!/usr/bin/env python3
+=#!/usr/bin/env python3
+ #!/usr/bin/env python3
+"#!/usr/bin/env python3
+_#!/usr/bin/env python3
+_#!/usr/bin/env python3
+m#!/usr/bin/env python3
+a#!/usr/bin/env python3
+i#!/usr/bin/env python3
+n#!/usr/bin/env python3
+_#!/usr/bin/env python3
+_#!/usr/bin/env python3
+"#!/usr/bin/env python3
+:#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+ #!/usr/bin/env python3
+=#!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+.#!/usr/bin/env python3
+A#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+u#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+n#!/usr/bin/env python3
+t#!/usr/bin/env python3
+P#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+(#!/usr/bin/env python3
+d#!/usr/bin/env python3
+e#!/usr/bin/env python3
+s#!/usr/bin/env python3
+c#!/usr/bin/env python3
+r#!/usr/bin/env python3
+i#!/usr/bin/env python3
+p#!/usr/bin/env python3
+t#!/usr/bin/env python3
+i#!/usr/bin/env python3
+o#!/usr/bin/env python3
+n#!/usr/bin/env python3
+=#!/usr/bin/env python3
+'#!/usr/bin/env python3
+G#!/usr/bin/env python3
+e#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+a#!/usr/bin/env python3
+t#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+R#!/usr/bin/env python3
+E#!/usr/bin/env python3
+A#!/usr/bin/env python3
+D#!/usr/bin/env python3
+M#!/usr/bin/env python3
+E#!/usr/bin/env python3
+.#!/usr/bin/env python3
+m#!/usr/bin/env python3
+d#!/usr/bin/env python3
+ #!/usr/bin/env python3
+f#!/usr/bin/env python3
+o#!/usr/bin/env python3
+r#!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+ #!/usr/bin/env python3
+G#!/usr/bin/env python3
+i#!/usr/bin/env python3
+t#!/usr/bin/env python3
+H#!/usr/bin/env python3
+u#!/usr/bin/env python3
+b#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+s#!/usr/bin/env python3
+i#!/usr/bin/env python3
+t#!/usr/bin/env python3
+o#!/usr/bin/env python3
+r#!/usr/bin/env python3
+y#!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+n#!/usr/bin/env python3
+d#!/usr/bin/env python3
+ #!/usr/bin/env python3
+c#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+a#!/usr/bin/env python3
+t#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+ #!/usr/bin/env python3
+p#!/usr/bin/env python3
+u#!/usr/bin/env python3
+l#!/usr/bin/env python3
+l#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+q#!/usr/bin/env python3
+u#!/usr/bin/env python3
+e#!/usr/bin/env python3
+s#!/usr/bin/env python3
+t#!/usr/bin/env python3
+.#!/usr/bin/env python3
+'#!/usr/bin/env python3
+)#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+.#!/usr/bin/env python3
+a#!/usr/bin/env python3
+d#!/usr/bin/env python3
+d#!/usr/bin/env python3
+_#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+u#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+n#!/usr/bin/env python3
+t#!/usr/bin/env python3
+(#!/usr/bin/env python3
+'#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+o#!/usr/bin/env python3
+w#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+'#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+t#!/usr/bin/env python3
+y#!/usr/bin/env python3
+p#!/usr/bin/env python3
+e#!/usr/bin/env python3
+=#!/usr/bin/env python3
+s#!/usr/bin/env python3
+t#!/usr/bin/env python3
+r#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+h#!/usr/bin/env python3
+e#!/usr/bin/env python3
+l#!/usr/bin/env python3
+p#!/usr/bin/env python3
+=#!/usr/bin/env python3
+'#!/usr/bin/env python3
+T#!/usr/bin/env python3
+h#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+o#!/usr/bin/env python3
+w#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+ #!/usr/bin/env python3
+o#!/usr/bin/env python3
+f#!/usr/bin/env python3
+ #!/usr/bin/env python3
+t#!/usr/bin/env python3
+h#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+s#!/usr/bin/env python3
+i#!/usr/bin/env python3
+t#!/usr/bin/env python3
+o#!/usr/bin/env python3
+r#!/usr/bin/env python3
+y#!/usr/bin/env python3
+.#!/usr/bin/env python3
+'#!/usr/bin/env python3
+)#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+.#!/usr/bin/env python3
+a#!/usr/bin/env python3
+d#!/usr/bin/env python3
+d#!/usr/bin/env python3
+_#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+u#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+n#!/usr/bin/env python3
+t#!/usr/bin/env python3
+(#!/usr/bin/env python3
+'#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+'#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+t#!/usr/bin/env python3
+y#!/usr/bin/env python3
+p#!/usr/bin/env python3
+e#!/usr/bin/env python3
+=#!/usr/bin/env python3
+s#!/usr/bin/env python3
+t#!/usr/bin/env python3
+r#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+h#!/usr/bin/env python3
+e#!/usr/bin/env python3
+l#!/usr/bin/env python3
+p#!/usr/bin/env python3
+=#!/usr/bin/env python3
+'#!/usr/bin/env python3
+T#!/usr/bin/env python3
+h#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+o#!/usr/bin/env python3
+f#!/usr/bin/env python3
+ #!/usr/bin/env python3
+t#!/usr/bin/env python3
+h#!/usr/bin/env python3
+e#!/usr/bin/env python3
+ #!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+s#!/usr/bin/env python3
+i#!/usr/bin/env python3
+t#!/usr/bin/env python3
+o#!/usr/bin/env python3
+r#!/usr/bin/env python3
+y#!/usr/bin/env python3
+.#!/usr/bin/env python3
+'#!/usr/bin/env python3
+)#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+s#!/usr/bin/env python3
+ #!/usr/bin/env python3
+=#!/usr/bin/env python3
+ #!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+.#!/usr/bin/env python3
+p#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+s#!/usr/bin/env python3
+e#!/usr/bin/env python3
+_#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+s#!/usr/bin/env python3
+(#!/usr/bin/env python3
+)#!/usr/bin/env python3
+
+#!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+ #!/usr/bin/env python3
+m#!/usr/bin/env python3
+a#!/usr/bin/env python3
+i#!/usr/bin/env python3
+n#!/usr/bin/env python3
+(#!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+s#!/usr/bin/env python3
+.#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+o#!/usr/bin/env python3
+w#!/usr/bin/env python3
+n#!/usr/bin/env python3
+e#!/usr/bin/env python3
+r#!/usr/bin/env python3
+,#!/usr/bin/env python3
+ #!/usr/bin/env python3
+a#!/usr/bin/env python3
+r#!/usr/bin/env python3
+g#!/usr/bin/env python3
+s#!/usr/bin/env python3
+.#!/usr/bin/env python3
+r#!/usr/bin/env python3
+e#!/usr/bin/env python3
+p#!/usr/bin/env python3
+o#!/usr/bin/env python3
+_#!/usr/bin/env python3
+n#!/usr/bin/env python3
+a#!/usr/bin/env python3
+m#!/usr/bin/env python3
+e#!/usr/bin/env python3
+)#!/usr/bin/env python3
