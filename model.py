@@ -13,7 +13,7 @@ class Model:
         return auth_key
     
     def generate_completion(self, prompt):
-        completion = openai.Completion.create(model="text-davinci-003", prompt=f"{prompt}\ngenerate a readme file including requirements and usage for this code.")
+        completion = openai.Completion.create(model="text-davinci-003", max_tokens=1000, prompt=f"{prompt}\ngenerate a readme file including requirements and usage for this code.")
         return completion
 
 

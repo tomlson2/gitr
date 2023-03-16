@@ -1,5 +1,6 @@
 import os
 import tempfile
+import time
 import re
 from github import Github
 from git import Repo
@@ -58,20 +59,21 @@ class RepoManager:
 
         return content_buffer
 
-    def create_readme_pr(self, repo_url, repo_name, repo_owner, branch_name, pr_title, pr_body, content):
-        repo = self.github.get_repo(f"{repo_owner}/{repo_name}")
+    def create_readme_pr(self, repo, prompt):
+        branch_name = f'update-readme-{int(time.time())}'
 
         # Clone the repository to a temporary directory
         with tempfile.TemporaryDirectory() as temp_dir:
-            git_repo = Repo.clone_from(repo_url, temp_dir)
+            git_repo = Repo.clone_from(repo.clone_url, temp_dir)
 
             # Create a new branch
             git_repo.git.checkout('-b', branch_name)
 
+
             # Create or modify the README file
             readme_path = os.path.join(temp_dir, 'README.md')
             with open(readme_path, 'w') as readme_file:
-                readme_file.write(content)
+                readme_file.write(prompt)
 
             # Commit and push the changes
             git_repo.git.add(readme_path)
@@ -80,10 +82,10 @@ class RepoManager:
 
         # Create a pull request
         pull_request = repo.create_pull(
-            title=pr_title,
-            body=pr_body,
+            title="Update README.md",
+            body="This pull request updates the README.md file with Documatic.",
             head=branch_name,
-            base='main'
+            base='master'
         )
 
         return pull_request.html_url
