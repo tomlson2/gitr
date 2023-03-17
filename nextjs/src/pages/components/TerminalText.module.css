@@ -1,0 +1,15 @@
+.terminal-cursor {
+  display: inline-block;
+  background-color: black;
+  width: 8px;
+  height: 16px;
+  vertical-align: middle;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}

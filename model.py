@@ -12,7 +12,7 @@ class Model:
         return config.get('OpenAI', 'api_key')
     
     def generate_completion(self, model, prompt, temperature=0.5):
-        completion = openai.Completion.create(model=model, temperature=temperature, max_tokens=1500, prompt=prompt)
+        completion = openai.Completion.create(model=model, temperature=temperature, max_tokens=1000, prompt=prompt)
         return completion
     
     def generate_edit(self, model, prompt, instruction, temperature=0.9):

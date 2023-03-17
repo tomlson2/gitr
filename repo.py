@@ -12,6 +12,7 @@ class CodeFile:
     def __init__(self, path: str, content: str):
         self.path = path
         self.content = content
+        _, self.ext = os.path.splitext(path) 
 
 class RepoManager:
     def __init__(self, repo_owner: str, repo_name: str):
@@ -49,7 +50,7 @@ class RepoManager:
                 break
 
             if content.type == 'dir':
-                if content.path in ['node_modules', '.next', 'nextjs', '__pycache__', 'Flask']:
+                if content.path in ['node_modules', '.next', 'nextjs', '__pycache__', 'Flask', 'jars']:
                     continue                
 
                 code_files += self.get_code_files(content.path, token_limit - len(code_files))
@@ -114,7 +115,7 @@ class RepoManager:
             base=self.repo.default_branch
         )
 
-        return pull_request.html_url
+        return completion
 
     def generate_comments_for_functions(self):
         code_files = self.get_code_files()
@@ -137,7 +138,7 @@ class RepoManager:
                 with open(file_path, 'r') as file:
                     original_content = file.read()
 
-                completion = model.generate_completion("text-davinci-003", prompt=f"{code_file.content} Please analyze the code and generate detailed docstrings for each function, it should be formatted and styled after the PEP8 standard. only write the first line of the function with the docstring under it. Do it for all of the functions and classes in the code block. Do not add extra code.")
+                completion = model.generate_completion("text-davinci-003", prompt=f'{code_file.content} you are a professional software engineer that has been tasked with adding docstrings to your code base. Give the output in the form of:\ndef...\n"""docstring"""')
                 # Generate comments for the parsed "function-only" code
                 function_with_comment = completion["choices"][0]["text"]
                 print(code_file.content)
@@ -145,6 +146,8 @@ class RepoManager:
 
                 # Integrate comments back into the original code
                 updated_content = self.integrate_comments(original_content, code_file.content, function_with_comment)
+                if updated_content == original_content:
+                    continue
 
                 with open(file_path, 'w') as file:
                     file.write(updated_content)
@@ -165,12 +168,12 @@ class RepoManager:
         )
 
         return pull_request
-    
+
     def integrate_comments(self, original_content, function_only_content, function_with_comment):
         # Create a mapping of function signatures to their corresponding comments
         function_map = {}
-        function_lines = function_only_content.split('\n')
-        function_with_comment_lines = function_with_comment.split('\n')
+        function_lines = function_only_content.splitlines()
+        function_with_comment_lines = function_with_comment.splitlines()
 
         for line in function_with_comment_lines:
             if line.strip() in function_lines:
@@ -181,9 +184,11 @@ class RepoManager:
                 # Collect comment lines before the function signature
                 while index > 0:
                     index -= 1
-                    comment_line = function_with_comment_lines[index].strip()
-                    if comment_line.startswith('"""'):
+                    comment_line = function_with_comment_lines[index]
+                    if comment_line.strip().startswith('"""'):
                         comment_lines.insert(0, comment_line)
+                        if len(comment_lines) > 1 and comment_lines[-2].strip().startswith('"""'):
+                            break
                     else:
                         break
 
