@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 from repo import RepoManager
+from model import Model
 
 app = Flask(__name__)
 CORS(app)
@@ -33,6 +34,18 @@ def create_pullrqeuest():
     link = manager.generate_pr(readme)
 
     return jsonify({'link': link})
+
+@app.route('/api/update-readme', methods=['POST'])
+def update_readme():
+    data = request.get_json()
+    readme = data.get('readme')
+    update = data.get('update')
+
+    res = Model().generate_edit('text-davinci-edit-001', readme, update, 0.9)
+    new_readme = res['choices'][0]['text']
+    print(new_readme)
+
+    return jsonify({'readme': new_readme})
 
 
 

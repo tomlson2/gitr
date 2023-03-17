@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/Home.module.css'
 
 const useTypewriter = (textToType, typingSpeed) => {
   const [typedText, setTypedText] = useState('');
+
   useEffect(() => {
+    setTypedText(''); // Reset the typed text when the textToType changes
     let index = 0;
+    let typingTimeout;
 
     const typeText = () => {
       if (index <= textToType.length) {
-        setTypedText(typedText + textToType.slice(0, index));
+        setTypedText(textToType.slice(0, index));
         index++;
-        setTimeout(typeText, typingSpeed);
+        typingTimeout = setTimeout(typeText, typingSpeed);
       }
     };
 
     typeText();
 
     return () => {
-      clearTimeout(typeText);
+      clearTimeout(typingTimeout); // Properly clear the timeout when the effect is cleaned up
     };
   }, [textToType, typingSpeed]);
 

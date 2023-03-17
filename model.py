@@ -17,7 +17,6 @@ class Model:
     
     def generate_edit(self, model, prompt, instruction, temperature=0.9):
         edit = openai.Edit.create(model=model, input=prompt, instruction=instruction, temperature=temperature)
-        print(f'edit: {edit}')
         return edit
     
 

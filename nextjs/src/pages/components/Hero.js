@@ -6,13 +6,17 @@ import useTypewriter from '../hooks/useTypewriter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Hero = () => {
   const [readme, setReadme] = useState('');
+  const [hasReadme, setHasReadme] = useState(false);
   const [username, setUsername] = useState('');
   const [repo, setRepo] = useState('');
   const [generating, startedGenerating] = useState(false);
   const [link, setLink] = useState('');
+  const [update, setUpdate] = useState('');
+  const [markdownKey, setMarkdownKey] = useState(0);
 
   const handleGenerateReadme = async () => {
     startedGenerating(true);
@@ -20,6 +24,7 @@ const Hero = () => {
     const data = await res.json();
     startedGenerating(false);
     setReadme(data.readme);
+    setHasReadme(true);
   };
   
   const handlePullRequest = async () => {
@@ -35,8 +40,21 @@ const Hero = () => {
   };
 
   const handleChanges = async () => {
-    return null;
-  }
+    startedGenerating(true);
+    setHasReadme(false);
+    const res = await fetch(`http://localhost:5000/api/update-readme`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ readme, update })
+    });
+    const data = await res.json();
+    startedGenerating(false);
+    setReadme(data.readme);
+    setHasReadme(true);
+    setMarkdownKey(markdownKey + 1); // Increment the key
+  };
 
   const typedReadme = useTypewriter(readme, 5);
   
@@ -47,14 +65,17 @@ const Hero = () => {
         <p>Automatically generate READMEs for your GitHub repositories</p>
         <div className={styles.inputcontainer}>
           <input type="text" placeholder="GitHub Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-          <input type="text" placeholder="Repository Name" value={repo} onChange={(e) => setRepo(e.target.value)} />
-          <button onClick={handleGenerateReadme}>Generate README</button>
+          <input type="text" placeholder="Repository Name"  value={repo} onChange={(e) => setRepo(e.target.value)}/>
+          <button onClick={handleGenerateReadme}>
+            Generate README <span className={styles.iconWrapper}><FontAwesomeIcon icon={faPencilAlt} /></span>
+            </button>
         </div>
         {generating && <div className={styles.readmecontainer}>
           <span className={styles.cursor}></span>
         </div>}
-        {readme && <div className={styles.readmecontainer}>
+        {hasReadme && <div className={styles.readmecontainer}>
           <ReactMarkdown
+            key={markdownKey}
             children={typedReadme}
             components={{
               code({node, inline, className, children, ...props}) {
@@ -81,6 +102,8 @@ const Hero = () => {
             className={styles.chatcontainer}
             type="text"
             placeholder="Type changes here..."
+            value={update} 
+            onChange={(e) => setUpdate(e.target.value)}
           />
           <button className={styles.sendButton} onClick={handleChanges}>
             <FontAwesomeIcon icon={faPaperPlane} />

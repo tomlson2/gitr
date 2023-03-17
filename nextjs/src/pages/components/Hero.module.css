@@ -64,6 +64,10 @@
     }
   }
 
+  .iconWrapper {
+    margin-left: 0.5em;
+  }
+  
 .hero .viewPRButton {
   font-size: 1rem;
   font-weight: 600;
@@ -109,11 +113,11 @@
     border: 2px solid #333;
     border-radius: 5px;
     outline: none;
+    width: 30%;
   }
 
   .chatcontainer {
     margin-top: 20px;
-    width: 100%;
   }
   
   .hero input:focus {
@@ -146,13 +150,15 @@
 
   .hero .inputWrapper {
     position: relative;
-    width: 100%;
   }
   
   .hero .chatcontainer {
     margin-top: 20px;
-    width: 100%;
+    width: 700px; /* Set the width to the same value as the readme container */
     padding-right: 40px; /* Add padding to accommodate the button */
+    display:flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .hero .sendButton {
