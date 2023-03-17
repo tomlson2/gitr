@@ -1,3 +1,11 @@
 openaitoken.txt
 config.ini
 __pycache__
+
+# Ignore database files
+*.db
+*.sqlite
+*.sqlitedb
+
+# Ignore SQLAlchemy migration files
+alembic/versions/*.pyc
