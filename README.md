@@ -1,31 +1,37 @@
+
 # Documatic
 
-Documatic is an automated script for generating README files for Github Repositories.
+Documatic is a tool for automatically generating documentation for a GitHub repository. It can generate a README.md file for your repository and create a pull request with the generated content. It can also generate comments for functions in your code and create a pull request with the generated comments.
 
 ## Installation
 
-Documatic is wrapped in a Python package and can be installed with `pip`:
+Clone the repository and install the dependencies.
 
-```sh
-pip install documatic
+```
+git clone https://github.com/<username>/Documatic.git
+cd Documatic
+pip install -r requirements.txt
 ```
 
 ## Usage
 
-Documatic is used by first creating an access token for a Github account, which can be done in the Github Settings page. An OpenAI-compatible API key is also needed in order to access OpenAI's text completion model.
+### Generate README
 
-Once the access token and API key are acquired, they can be set up in the `config.ini` configuration file. After that, the script can be run with the following command:
+You can generate a README.md file for your repository and create a pull request with the generated content by running the following command.
 
-```sh
+```
 python generate_readme_cli.py <repo_owner> <repo_name>
 ```
 
-Documatic will scrape all text files in the specified repository and use OpenAI's text completion model to generate a README document. The generated document will be added to a new branch and a pull request will be created.
+You can also generate a README.md file from the API endpoint.
 
-## Contributing
+```
+curl -X GET http://localhost:5000/api/readme?username=<repo_owner>&repo=<repo_name>
+```
 
-If you would like to contribute to this project, feel free to open a pull request or create an issue in the [Github repository](https://github.com/kadupitiya/documatic).
+### Generate Comments
 
-## License
+You can generate comments for functions in your code and create a pull request with the generated comments by running the following command.
 
-Documatic is released under the MIT License. See [LICENSE](LICENSE) for details.
+```
+python generate_comments_cli.py <repo_owner> <repo_name>
