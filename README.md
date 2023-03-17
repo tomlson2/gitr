@@ -35,10 +35,3 @@ You can generate comments for functions in your code and create a pull request w
 
 ```
 python generate_comments_cli.py <repo_owner> <repo_name>
-```
-
-You can also generate comments from the API endpoint.
-
-```
-curl -X GET http://localhost:5000/api/comments?username=<repo_owner>&repo=<repo_name>
-```
