@@ -1,6 +1,7 @@
+
 # Documatic
 
-Documatic is an automated script for generating README files for Github Repositories.
+Documatic is an automated script for generating README files for Github Repositories. It also adds generated comments to functions in the repository.
 
 ## Installation
 
@@ -21,6 +22,8 @@ python generate_readme_cli.py <repo_owner> <repo_name>
 ```
 
 Documatic will scrape all text files in the specified repository and use OpenAI's text completion model to generate a README document. The generated document will be added to a new branch and a pull request will be created.
+
+Comments will also be added to functions in the repository in a new branch and a pull request will be created.
 
 ## Contributing
 
