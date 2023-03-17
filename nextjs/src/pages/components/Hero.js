@@ -3,13 +3,16 @@ import styles from './Hero.module.css';
 import ReactMarkdown from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import useTypewriter from '../hooks/useTypewriter';
-import TerminalText from './TerminalText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 const Hero = () => {
   const [readme, setReadme] = useState('');
   const [username, setUsername] = useState('');
   const [repo, setRepo] = useState('');
   const [generating, startedGenerating] = useState(false);
+  const [link, setLink] = useState('');
 
   const handleGenerateReadme = async () => {
     startedGenerating(true);
@@ -18,8 +21,24 @@ const Hero = () => {
     startedGenerating(false);
     setReadme(data.readme);
   };
+  
+  const handlePullRequest = async () => {
+    const res = await fetch(`http://localhost:5000/api/pr?username=${username}&repo=${repo}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ readme })
+    });
+    const data = await res.json();
+    setLink(data.link);
+  };
 
-  const typedReadme = useTypewriter(readme, 10);
+  const handleChanges = async () => {
+    return null;
+  }
+
+  const typedReadme = useTypewriter(readme, 5);
   
   return (
     <div className={styles.hero}>
@@ -32,7 +51,7 @@ const Hero = () => {
           <button onClick={handleGenerateReadme}>Generate README</button>
         </div>
         {generating && <div className={styles.readmecontainer}>
-          <span class={styles.cursor}></span>
+          <span className={styles.cursor}></span>
         </div>}
         {readme && <div className={styles.readmecontainer}>
           <ReactMarkdown
@@ -56,7 +75,32 @@ const Hero = () => {
             }}
           />
         </div>}
-        {readme && <input className={styles.chatcontainer} type="text" placeholder="Type changes here..."/>}
+        {readme && (
+        <div className={styles.inputWrapper}>
+          <input
+            className={styles.chatcontainer}
+            type="text"
+            placeholder="Type changes here..."
+          />
+          <button className={styles.sendButton} onClick={handleChanges}>
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </button>
+        </div>
+      )}
+        {readme && (
+        <div className={styles.buttonContainer}>
+          <button onClick={handlePullRequest}>Create Pull Request</button>
+          <button
+            className={link ? styles.viewPRButton : styles.viewPRButtonDisabled}
+            onClick={() => {
+              if (link) window.open(link, '_blank', 'noopener noreferrer');
+            }}
+          >
+            View Pull Request{' '}
+            <FontAwesomeIcon icon={faExternalLinkAlt} />
+          </button>
+        </div>
+        )}
       </div>
     </div>
   );

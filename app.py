@@ -16,16 +16,25 @@ def generate_readme():
 
     # Call your function to generate the README for the given username and repo
     manager = RepoManager(username, repo)
-    readme = manager.generate_readme_pr()
-
-    print('readme :' + readme)
+    readme = manager.generate_readme()
 
     # Return the generated README as JSON
     return jsonify({'readme': readme})
 
-@app.rout('/api/pr')
+@app.route('/api/pr', methods=['POST'])
 def create_pullrqeuest():
     print("generating pr")
+    username = request.args.get('username')
+    repo = request.args.get('repo')
+    data = request.get_json()
+    readme = data.get('readme')
+
+    manager = RepoManager(username, repo)
+    link = manager.generate_pr(readme)
+
+    return jsonify({'link': link})
+
+
 
 
 if __name__ == "__main__":

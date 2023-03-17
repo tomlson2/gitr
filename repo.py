@@ -33,7 +33,7 @@ class RepoManager:
         file_priority = ['.md', '.rst', '.txt', '.py', '.js', '.html', '.css', '.java', '.cpp', '.c']
 
         def is_text_file(filepath):
-            return not filepath.endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.ico', '.pdf', '.zip', '.tar.gz', '.svg'))
+            return not filepath.endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.ico', '.pdf', '.zip', '.tar.gz', '.svg', '.pkl'))
 
         def remove_svg_content(file_content, file_ext):
             if file_ext in ['.html', '.js']:
@@ -82,11 +82,14 @@ class RepoManager:
 
         return "\n".join(content_list)
 
-    
-    def generate_readme_pr(self):
+    def generate_readme(self):
         content_buffer = self.concatenate_code_files(self.get_code_files())
         completion = Model().generate_completion("text-davinci-003", f"{content_buffer}\n---\nREADME.md")
-        completion = completion["choices"][0]["text"]
+        readme = completion["choices"][0]["text"]
+        return readme
+
+    
+    def generate_pr(self, readme):
         branch_name = f'update-readme-{int(time.time())}'
 
         # Clone the repository to a temporary directory
@@ -100,7 +103,7 @@ class RepoManager:
             # Create or modify the README file
             readme_path = os.path.join(temp_dir, 'README.md')
             with open(readme_path, 'w') as readme_file:
-                readme_file.write(completion)
+                readme_file.write(readme)
 
             # Commit and push the changes
             git_repo.git.add(readme_path)
@@ -115,7 +118,7 @@ class RepoManager:
             base=self.repo.default_branch
         )
 
-        return completion
+        return pull_request.html_url
 
     def generate_comments_for_functions(self):
         code_files = self.get_code_files()
