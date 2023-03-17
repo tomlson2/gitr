@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Header from './components/Header';
 import React from 'react';
 import useTypewriter from './hooks/useTypewriter';
+import Lottie from 'react-lottie';
+import githubAnimationData from '../../public/github-animation.json'
 
 export default function Home() {
   const typewriterText = useTypewriter('Generative AI', 100);
@@ -23,9 +25,21 @@ export default function Home() {
             <br />in your repository
           </h1>
           <div className={styles.buttonContainer}>
-            <Link href="/write-me">
-              <button className={styles.button}>Try it out</button>
-            </Link>
+          <Lottie
+            options={{
+              loop: true,
+              autoplay: true,
+              animationData: githubAnimationData,
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+              },
+            }}
+            height={175}
+            width={175}
+          />
+          <Link href="/write-me">
+            <button className={styles.button}>Try it out</button>
+          </Link>
           </div>
         </main>
       </div>

@@ -79,12 +79,15 @@
 
 .buttonContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
+
 .button {
+  margin-top: 30px;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
