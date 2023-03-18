@@ -24,3 +24,21 @@
     font-size: 1.5rem;
     color: #333333;
   }
+
+  /* Add these styles to your existing Header.module.css file */
+.loginButton {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-left: 16px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #666;
+}

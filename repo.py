@@ -15,10 +15,12 @@ class CodeFile:
         _, self.ext = os.path.splitext(path) 
 
 class RepoManager:
-    def __init__(self, repo_owner: str, repo_name: str):
+    def __init__(self, repo_name: str, github: Github):
         self.access_token = self.read_auth()
-        self.github = Github(self.access_token)
-        self.repo = self.github.get_repo(f"{repo_owner}/{repo_name}")
+        self.github = github
+        self.owner = github.get_user().login
+        print(self.owner)
+        self.repo = github.get_repo(f"{self.owner}/{repo_name}")
     
     def parse_python(self, file_ext, code):
         if file_ext == ".py":
@@ -120,86 +122,13 @@ class RepoManager:
 
         return pull_request.html_url
 
-    def generate_comments_for_functions(self):
-        code_files = self.get_code_files()
-        model = Model()
+    def readme_exists(self):
+        try:
+            self.repo.get_contents('README.md')
+            return True
+        except:
+            return False
 
-        branch_name = f'add-comments-{int(time.time())}'
-        # Clone the repository to a temporary directory
-        with tempfile.TemporaryDirectory() as temp_dir:
-            git_repo = Repo.clone_from(self.repo.clone_url, temp_dir)
-
-            # Create a new branch
-            git_repo.git.checkout('-b', branch_name)
-
-            # Add comments to each file
-            for code_file in code_files:
-                print(code_file.path[-3:])
-                if not code_file.content or code_file.path[-3:] != ".py":
-                    continue
-                file_path = os.path.join(temp_dir, code_file.path)
-                with open(file_path, 'r') as file:
-                    original_content = file.read()
-
-                completion = model.generate_completion("text-davinci-003", prompt=f'{code_file.content} you are a professional software engineer that has been tasked with adding docstrings to your code base. Give the output in the form of:\ndef...\n"""docstring"""')
-                # Generate comments for the parsed "function-only" code
-                function_with_comment = completion["choices"][0]["text"]
-                print(code_file.content)
-                print(function_with_comment)
-
-                # Integrate comments back into the original code
-                updated_content = self.integrate_comments(original_content, code_file.content, function_with_comment)
-                if updated_content == original_content:
-                    continue
-
-                with open(file_path, 'w') as file:
-                    file.write(updated_content)
-
-                # Commit the changes
-                git_repo.git.add(file_path)
-                git_repo.git.commit('-m', f'Added comment to {code_file.path}')
-
-            # Push the changes
-            git_repo.git.push('--set-upstream', 'origin', branch_name)
-
-        # Create a pull request
-        pull_request = self.repo.create_pull(
-            title="Add generated comments to functions",
-            body="This pull request adds generated comments to functions in the repository.",
-            head=branch_name,
-            base=self.repo.default_branch
-        )
-
-        return pull_request
-
-    def integrate_comments(self, original_content, function_only_content, function_with_comment):
-        # Create a mapping of function signatures to their corresponding comments
-        function_map = {}
-        function_lines = function_only_content.splitlines()
-        function_with_comment_lines = function_with_comment.splitlines()
-
-        for line in function_with_comment_lines:
-            if line.strip() in function_lines:
-                function_signature = line.strip()
-                comment_lines = []
-                index = function_with_comment_lines.index(line)
-
-                # Collect comment lines before the function signature
-                while index > 0:
-                    index -= 1
-                    comment_line = function_with_comment_lines[index]
-                    if comment_line.strip().startswith('"""'):
-                        comment_lines.insert(0, comment_line)
-                        if len(comment_lines) > 1 and comment_lines[-2].strip().startswith('"""'):
-                            break
-                    else:
-                        break
-
-                function_map[function_signature] = '\n'.join(comment_lines)
-
-        # Replace the function signatures in the original content with the comments and function signatures
-        updated_content = original_content
-        for function_signature, comment in function_map.items():
-            updated_content = updated_content.replace(function_signature, f"{comment}\n{function_signature}")
-
-        return updated_content
+    def get_latest_commit_message(self):
+        commit = self.repo.get_commits()[0]
+        return commit.commit.message

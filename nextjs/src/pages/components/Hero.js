@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Hero.module.css';
 import ReactMarkdown from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
@@ -11,7 +11,6 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 const Hero = () => {
   const [readme, setReadme] = useState('');
   const [hasReadme, setHasReadme] = useState(false);
-  const [username, setUsername] = useState('');
   const [repo, setRepo] = useState('');
   const [generating, startedGenerating] = useState(false);
   const [link, setLink] = useState('');
@@ -20,16 +19,20 @@ const Hero = () => {
 
   const handleGenerateReadme = async () => {
     startedGenerating(true);
-    const res = await fetch(`http://localhost:5000/api/readme?username=${username}&repo=${repo}`);
+    const res = await fetch(`http://localhost:5000/api/readme?repo=${repo}`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await res.json();
     startedGenerating(false);
     setReadme(data.readme);
     setHasReadme(true);
   };
-  
+
   const handlePullRequest = async () => {
-    const res = await fetch(`http://localhost:5000/api/pr?username=${username}&repo=${repo}`, {
+    const res = await fetch(`http://localhost:5000/api/pr?repo=${repo}`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -44,6 +47,7 @@ const Hero = () => {
     setHasReadme(false);
     const res = await fetch(`http://localhost:5000/api/update-readme`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -53,23 +57,32 @@ const Hero = () => {
     startedGenerating(false);
     setReadme(data.readme);
     setHasReadme(true);
-    setMarkdownKey(markdownKey + 1); // Increment the key
+    setMarkdownKey(markdownKey + 1);
   };
 
   const typedReadme = useTypewriter(readme, 5);
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  
+  const userLogin = getCookie('userLogin');
   
   return (
     <div className={styles.hero}>
       <div className={styles.content}>
         <h1>WRITEME.md</h1>
         <p>Automatically generate READMEs for your GitHub repositories</p>
-        <div className={styles.inputcontainer}>
-          <input type="text" placeholder="GitHub Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        {!userLogin && <p>'You are not logged in.'</p>}
+        {userLogin && <div className={styles.inputcontainer}>
+          <input type="text" placeholder="Repository Owner"  value={userLogin} readOnly />
           <input type="text" placeholder="Repository Name"  value={repo} onChange={(e) => setRepo(e.target.value)}/>
           <button onClick={handleGenerateReadme}>
             Generate README <span className={styles.iconWrapper}><FontAwesomeIcon icon={faPencilAlt} /></span>
             </button>
-        </div>
+        </div>}
         {generating && <div className={styles.readmecontainer}>
           <span className={styles.cursor}></span>
         </div>}
