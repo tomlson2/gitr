@@ -75,7 +75,7 @@ const Hero = () => {
       <div className={styles.content}>
         <h1>WRITEME.md</h1>
         <p>Automatically generate READMEs for your GitHub repositories</p>
-        {!userLogin && <p>'You are not logged in.'</p>}
+        {!userLogin && <p>You are not logged in.</p>}
         {userLogin && <div className={styles.inputcontainer}>
           <input type="text" placeholder="Repository Owner"  value={userLogin} readOnly />
           <input type="text" placeholder="Repository Name"  value={repo} onChange={(e) => setRepo(e.target.value)}/>
