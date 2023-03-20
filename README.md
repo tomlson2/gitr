@@ -2,14 +2,6 @@
 
 Documatic is an automated script for generating README files for Github Repositories.
 
-## Installation
-
-Documatic is wrapped in a Python package and can be installed with `pip`:
-
-```sh
-pip install documatic
-```
-
 ## Usage
 
 Documatic is used by first creating an access token for a Github account, which can be done in the Github Settings page. An OpenAI-compatible API key is also needed in order to access OpenAI's text completion model.
