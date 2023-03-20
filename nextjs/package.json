@@ -12,16 +12,17 @@
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/react": "^16.14.35",
     "buffer": "^6.0.3",
     "https-browserify": "^1.0.0",
     "net-browserify": "^0.2.4",
     "next": "^10.2.3",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.9",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-lottie": "^1.2.3",
-    "react-markdown": "^8.0.5",
+    "react-markdown": "^6.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "stream-http": "^3.2.0"
   },
@@ -32,5 +33,5 @@
   },
   "engines": {
     "node": "14.21.3"
-  }    
+  }
 }

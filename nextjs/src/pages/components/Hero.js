@@ -63,9 +63,11 @@ const Hero = () => {
   const typedReadme = useTypewriter(readme, 5);
 
   function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    if (typeof window !== 'undefined') {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
   }
   
   const userLogin = getCookie('userLogin');
