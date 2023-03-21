@@ -5,10 +5,16 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <div className={styles.logoContainer}>
-          <img src="/logo.svg" alt="Documatic Logo" className={styles.logo} />
-          <h1 className={styles.logoText}>Documatic</h1>
-        </div>
+        <a>
+          <div className={styles.logoContainer}>
+            <img src="/logo.svg" alt="Documatic Logo" className={styles.logo} />
+            <h1 className={styles.logoText}>gitr</h1>
+          </div>
+        </a>
+      </Link>
+
+      <Link href="/login">
+        <a className={styles.loginButton}>Login</a>
       </Link>
     </header>
   );

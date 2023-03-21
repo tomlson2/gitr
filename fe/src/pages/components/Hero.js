@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './Hero.module.css';
 import ReactMarkdown from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { generateReadme, createPullRequest, updateReadme } from '../api/api';
 
 const Hero = () => {
   const [readme, setReadme] = useState('');
@@ -17,50 +18,30 @@ const Hero = () => {
   const [update, setUpdate] = useState('');
   const [markdownKey, setMarkdownKey] = useState(0);
 
+  const typedReadme = useTypewriter(readme, 5);
+
   const handleGenerateReadme = async () => {
     startedGenerating(true);
-    const res = await fetch(`http://localhost:5000/api/readme?repo=${repo}`, {
-      method: 'GET',
-      credentials: 'include'
-    });
-    const data = await res.json();
+    const generatedReadme = await generateReadme(repo);
     startedGenerating(false);
-    setReadme(data.readme);
+    setReadme(generatedReadme);
     setHasReadme(true);
   };
 
   const handlePullRequest = async () => {
-    const res = await fetch(`http://localhost:5000/api/pr?repo=${repo}`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ readme })
-    });
-    const data = await res.json();
-    setLink(data.link);
+    const pullRequestLink = await createPullRequest(repo, readme);
+    setLink(pullRequestLink);
   };
 
   const handleChanges = async () => {
     startedGenerating(true);
     setHasReadme(false);
-    const res = await fetch(`http://localhost:5000/api/update-readme`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ readme, update })
-    });
-    const data = await res.json();
+    const updatedReadme = await updateReadme(readme, update);
     startedGenerating(false);
-    setReadme(data.readme);
+    setReadme(updatedReadme);
     setHasReadme(true);
     setMarkdownKey(markdownKey + 1);
   };
-
-  const typedReadme = useTypewriter(readme, 5);
 
   function getCookie(name) {
     if (typeof window !== 'undefined') {

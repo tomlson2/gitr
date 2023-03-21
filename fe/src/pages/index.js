@@ -15,7 +15,7 @@ export default function Home() {
       <Header />
       <div className={styles.container}>
         <Head>
-          <title>Documatic</title>
+          <title>gitr</title>
           <meta name="description" content="Developer tools for documentation" />
         </Head>
 
