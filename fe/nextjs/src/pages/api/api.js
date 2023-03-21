@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://gitr.herokuapp.com";
 
 export const generateReadme = async (repo) => {
   const res = await fetch(`${API_BASE_URL}/api/readme?repo=${repo}`, {
