@@ -89,7 +89,7 @@ async def callback(request: Request, code: str):
         db.commit()
     
     request.session['user_id'] = user.id
-    resp = RedirectResponse(url='http://localhost:3000')
+    resp = RedirectResponse(url="https://documatic-usbo-hqvtc9fqf-tomlson2.vercel.app/")
     resp.set_cookie(key='userLogin', value=user.username)
     return resp
 
