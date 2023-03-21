@@ -13,7 +13,7 @@ const Header = () => {
         </a>
       </Link>
 
-      <Link href="/login">
+      <Link href="https://gitr.herokuapp.com/login">
         <a className={styles.loginButton}>Login</a>
       </Link>
     </header>
