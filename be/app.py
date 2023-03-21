@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Depends, HTTPException
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
+from fastapi.middleware.session import SessionMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette.responses import Response
@@ -37,6 +38,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(SessionMiddleware, secret_key="bolivia")
 
 def get_db():
     db = SessionLocal()
