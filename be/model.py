@@ -12,7 +12,9 @@ class Model:
         return config.get('OpenAI', 'api_key')
     
     def generate_completion(self, model, prompt, temperature=0.5):
-        completion = openai.Completion.create(model=model, temperature=temperature, max_tokens=300, prompt=prompt)
+        print("generating...")
+        completion = openai.ChatCompletion.create(model=model, temperature=temperature, max_tokens=1200, messages=[{"role": "user", "content": prompt}])
+        print(completion)
         return completion
     
     def generate_edit(self, model, prompt, instruction, temperature=0.9):

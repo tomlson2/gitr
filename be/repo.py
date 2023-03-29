@@ -86,8 +86,8 @@ class RepoManager:
 
     def generate_readme(self):
         content_buffer = self.concatenate_code_files(self.get_code_files())
-        completion = Model().generate_completion("text-davinci-003", f"{content_buffer}\n---\nREADME.md")
-        readme = completion["choices"][0]["text"]
+        completion = Model().generate_completion("gpt-4", f"{content_buffer}\n---\nREADME.md")
+        readme = completion["choices"][0]["message"]["content"]
         return readme
 
     
@@ -115,7 +115,7 @@ class RepoManager:
         # Create a pull request
         pull_request = self.repo.create_pull(
             title="Update README.md",
-            body="This pull request updates the README.md file with Documatic.",
+            body="This pull request updates the README.md file with gitr",
             head=branch_name,
             base=self.repo.default_branch
         )
