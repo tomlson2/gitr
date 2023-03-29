@@ -117,14 +117,24 @@ async def create_pull_request(request: Request, repo: str, data: dict):
     if not user:
         return JSONResponse(content={'error': 'User not logged in'}, status_code=401)
 
-    access_token = get_user_access_token(db=SessionLocal(), user_id=user.id)
-
-    github = Github(access_token)
+    github = Github(user)
 
     manager = RepoManager(repo, github)
     link = manager.generate_pr(readme)
 
     return JSONResponse(content={'link': link})
+
+@app.get("/api/auto-api")
+async def generate_api(request: Request, repo: str):
+    user = get_current_user(request)
+    if not user:
+        return JSONResponse(content={'error': 'User not logged in'}, status_code=401)
+    github = Github(user)
+
+    manager = RepoManager(repo, github)
+    readme = manager.generate_api()
+
+    return JSONResponse(content={'readme': readme})
 
 @app.post("/api/update-readme")
 async def update_readme(data: dict):

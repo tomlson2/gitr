@@ -11,9 +11,9 @@ class Model:
         config.read('config.ini')
         return config.get('OpenAI', 'api_key')
     
-    def generate_completion(self, model, prompt, temperature=0.5):
+    def generate_completion(self, model, prompt, max_tokens=4000, temperature=0.5):
         print("generating...")
-        completion = openai.ChatCompletion.create(model=model, temperature=temperature, max_tokens=1200, messages=[{"role": "user", "content": prompt}])
+        completion = openai.ChatCompletion.create(model=model, temperature=temperature, max_tokens=max_tokens, messages=[{"role": "user", "content": prompt}])
         print(completion)
         return completion
     

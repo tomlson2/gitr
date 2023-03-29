@@ -9,6 +9,15 @@ export const generateReadme = async (repo) => {
   return data.readme;
 };
 
+export const generateApi = async (repo) => {
+  const res = await fetch(`${API_BASE_URL}/api/auto-api?repo=${repo}`, {
+    method: 'GET',
+    credentials: 'include'
+  });
+  const data = await res.json();
+  return data.readme;
+};
+
 export const createPullRequest = async (repo, readme) => {
   const res = await fetch(`${API_BASE_URL}/api/pr?repo=${repo}`, {
     method: 'POST',
@@ -34,3 +43,4 @@ export const updateReadme = async (readme, update) => {
   const data = await res.json();
   return data.readme;
 };
+

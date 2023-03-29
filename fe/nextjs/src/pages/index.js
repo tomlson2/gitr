@@ -24,7 +24,6 @@ export default function Home() {
             {typewriterText}
             <br />in your repository
           </h1>
-          <div className={styles.buttonContainer}>
           <Lottie
             options={{
               loop: true,
@@ -37,8 +36,12 @@ export default function Home() {
             height={175}
             width={175}
           />
+          <div className={styles.buttonContainer}>
           <Link href="/write-me">
-            <button className={styles.button}>Try it out</button>
+            <button className={styles.button}>writeme</button>
+          </Link>
+          <Link href="/auto-api">
+            <button className={styles.button}>auto api</button>
           </Link>
           </div>
         </main>
