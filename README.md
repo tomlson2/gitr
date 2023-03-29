@@ -1,23 +1,23 @@
 # Documatic
 
-Documatic is an automated script for generating README files for Github Repositories.
+Documatic is a web application that generates and updates README files for GitHub repositories using GPT-3 by OpenAI. The application analyzes the code in a repository, generates a README file based on the code, and creates a pull request with the generated README file.
+
+## Features
+
+- Generate README files for GitHub repositories
+- Update existing README files with new content
+- Create pull requests with generated or updated README files
+- Web application with GitHub OAuth2 authentication
 
 ## Usage
 
-Documatic is used by first creating an access token for a Github account, which can be done in the Github Settings page. An OpenAI-compatible API key is also needed in order to access OpenAI's text completion model.
-
-Once the access token and API key are acquired, they can be set up in the `config.ini` configuration file. After that, the script can be run with the following command:
-
-```sh
-python generate_readme_cli.py <repo_owner> <repo_name>
-```
-
-Documatic will scrape all text files in the specified repository and use OpenAI's text completion model to generate a README document. The generated document will be added to a new branch and a pull request will be created.
-
-## Contributing
-
-If you would like to contribute to this project, feel free to open a pull request or create an issue in the [Github repository](https://github.com/kadupitiya/documatic).
+1. Open the web application in your browser
+2. Log in using your GitHub account
+3. Enter the name of the repository for which you want to generate or update a README file
+4. Click the "Generate README" button to generate a README file based on the repository's code
+5. Review the generated README file and make any desired changes
+6. Click the "Create Pull Request" button to create a pull request with the generated or updated README file
 
 ## License
 
-Documatic is released under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
